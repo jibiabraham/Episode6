@@ -1,59 +1,46 @@
 package com.studio.nn.episode6;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.Window;
+import android.support.v4.app.FragmentTransaction;
+
+import com.squareup.otto.Subscribe;
 
 /**
- * Created by jibi on 26/6/14.
+ * Created by jibi on 1/7/14.
  */
 public class MainActivity extends FragmentActivity {
-
-    private PagerSlidingTabStrip tabs;
-    private ViewPager pager;
-    private MyPagerAdapter adapter;
+    private VerticalPager mVerticalPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-
         setContentView(R.layout.activity_main);
 
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        pager = (ViewPager) findViewById(R.id.pager);
-        adapter = new MyPagerAdapter(getSupportFragmentManager());
-
-        pager.setAdapter(adapter);
-        tabs.setViewPager(pager);
+        mVerticalPager = (VerticalPager) findViewById(R.id.activity_main_vertical_pager);
+        createVerticalPages(10);
     }
 
-    public class MyPagerAdapter extends FragmentPagerAdapter {
-
-        private final String[] TITLES = { "CAT", "XAT,SNAP,CMAT", "Bank PO", "GMAT", "GRE,GATE", "Jobs & Careers", "Lounge" };
-
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
+    private void createVerticalPages(int howMany) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        for (int i = 0; i < howMany; i+=1){
+            CompositeVerticalPagerFragment fragment = CompositeVerticalPagerFragment.newInstance(i + 1);
+            fragmentTransaction.add(R.id.activity_main_vertical_pager, fragment);
         }
+        fragmentTransaction.commit();
+    }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return TITLES[position];
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getInstance().register(this);
+    }
 
-        @Override
-        public int getCount() {
-            return TITLES.length;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return new DiscussionPreviewFragment();
-        }
-
+    @Override
+    protected void onPause() {
+        EventBus.getInstance().unregister(this);
+        super.onPause();
     }
 }

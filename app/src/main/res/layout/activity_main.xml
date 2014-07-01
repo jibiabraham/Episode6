@@ -1,19 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<com.studio.nn.episode6.VerticalPager xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main_vertical_pager"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent">
-    
-    <com.studio.nn.episode6.PagerSlidingTabStrip
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/background_tabs_diagonal"></com.studio.nn.episode6.PagerSlidingTabStrip>
+    android:layout_height="match_parent" >
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_below="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:drawable/dialog_holo_light_frame"></android.support.v4.view.ViewPager>
-</RelativeLayout>
+
+</com.studio.nn.episode6.VerticalPager>
