@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  * Created by jibi on 1/7/14.
  */
 public class CompositeVerticalPagerFragment extends Fragment {
-    private ViewPager mhorizontalPager;
+    private ViewPager mHorizontalPager;
     private int mCentralPageIndex = 0;
     private int sectionNumber;
 
@@ -54,12 +55,16 @@ public class CompositeVerticalPagerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.composite_vertical_page, container, false);
-        mhorizontalPager = (ViewPager) view.findViewById(R.id.fragment_composite_pager);
+
+        TextView discussionTitle = (TextView) view.findViewById(R.id.discussion);
+        discussionTitle.setText("Discussion " + Integer.toString(sectionNumber));
+
+        mHorizontalPager = (ViewPager) view.findViewById(R.id.fragment_composite_pager);
 
         populateHorizontalPager();
 
-        mhorizontalPager.setCurrentItem(mCentralPageIndex);
-        mhorizontalPager.setOnPageChangeListener(mPagerChangeListener);
+        mHorizontalPager.setCurrentItem(mCentralPageIndex);
+        mHorizontalPager.setOnPageChangeListener(mPagerChangeListener);
         return view;
     }
 
@@ -68,6 +73,6 @@ public class CompositeVerticalPagerFragment extends Fragment {
         for (int i = 0; i < 3; i +=1){
             pages.add(VerticalPageFragment.newInstance(i + 1, sectionNumber));
         }
-        mhorizontalPager.setAdapter(new FragmentsClassesPagerAdapter(getChildFragmentManager(), getActivity(), pages));
+        mHorizontalPager.setAdapter(new FragmentsClassesPagerAdapter(getChildFragmentManager(), getActivity(), pages));
     }
 }
