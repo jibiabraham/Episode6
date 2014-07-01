@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:padding="15dp"
+    android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/discussion_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/discussion"
-        android:textSize="30sp"
-        android:gravity="center_horizontal"
-        android:paddingTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Discussion 1" />
+        style="@android:style/TextAppearance.Holo.Large"
+        android:text="@string/discussion_title" />
+
+    <View style="@style/Divider"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"></View>
 
     <com.studio.nn.episode6.SmartViewPager
         android:id="@+id/fragment_composite_pager"
